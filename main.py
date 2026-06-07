@@ -106,8 +106,8 @@ llm=ChatGroq(
     api_key=os.getenv("GROQ_API_KEY")
 
 )
-client=TavilyClient(
-    api_key=os.getenv("TAVILY_API_KEY")
+client = TavilyClient(
+    api_key=os.getenv("TAVILY_API_KEY", "").strip()
 )
 openweather_api_key=os.getenv("OPENWEATHER_API_KEY")
 
