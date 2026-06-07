@@ -16,7 +16,7 @@ app=FastAPI()
 con=mysql.connector.connect(
     host=os.getenv("DB_HOST"),
     user=os.getenv("DB_USER"),
-    port=os.getenv("DB_PORT"),
+    port=int(os.getenv("DB_PORT")),
     password=os.getenv("DB_PASSWORD"),
     database=os.getenv("DB_NAME")
 )
@@ -144,7 +144,12 @@ def budget_sql_tool(query:str):
 
     cursor = con.cursor(dictionary=True)
     cursor.execute(query)
-    return cursor.fetchall()
+    data = cursor.fetchall()
+
+    if not data:
+        return "No travel data found."
+
+    return str(data)
 @tool
 def famous_places_tool(query:str):
     """
